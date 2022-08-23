@@ -3,6 +3,7 @@ const previousOperandTextElement = document.querySelector('.previous-operand')
 const currentOperandTextElement = document.querySelector('.current-operand')
 
 const equals = document.querySelector('.equals')
+// adding an event listener to equals with conditional statement and function call
 equals.addEventListener('click', () => {
     if (currentNum != '' && previousNum != '') {
         calculate()
@@ -12,6 +13,8 @@ equals.addEventListener('click', () => {
 const decimal = document.querySelector('.decimal')
 
 const clear = document.querySelector('.clear')
+// adding event listener to clear and a function call
+clear.addEventListener('click', clearCalculator)
 
 const numberBtn = document.querySelectorAll('.number')
 const operatorBtn = document.querySelectorAll('.operator')
@@ -94,4 +97,11 @@ function displayResults() {
     } else {
         currentOperandTextElement.textContent = previousNum.slice(0, 11) + '...';
     }
+}
+
+function clearCalculator() {
+    previousNum = ''
+    previousOperandTextElement.textContent = ''
+    currentNum = ''
+    currentOperandTextElement.textContent = '0'
 }
