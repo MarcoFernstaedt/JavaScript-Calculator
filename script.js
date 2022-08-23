@@ -24,6 +24,7 @@ numberBtn.forEach((btn) => {
 })
 
 
+// function to calculate which number button was pressed
 function handleNumber(number) {
     if (currentNum.length < 11) {
         currentNum += number;
@@ -37,3 +38,12 @@ operatorBtn.forEach((btn) => {
         handleOperator(e.target.textContent)
     })
 })
+
+// function to calculate which operator button was pressed
+function handleOperator(op) {
+    operator = op;
+    previousNum = currentNum;
+    previousOperandTextElement.textContent = previousNum + ' ' + operator;
+    currentNum = ''
+    currentOperandTextElement.textContent = '';
+}
