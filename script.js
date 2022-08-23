@@ -70,10 +70,16 @@ function calculate() {
         }
         previousNum /= currentNum;
     }
+    previousNum = roundNumber(previousNum)
     previousNum = previousNum.toString()
     displayResults();
 }
 
+function roundNumber(num) {
+    return Math.round(num * 100000) / 100000;
+}
+
+// display results to screen
 function displayResults() {
     previousOperandTextElement.textContent = ''
     operator = '';
