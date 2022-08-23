@@ -27,7 +27,7 @@ body {
     padding: 1rem;
 }
 
-.screen {
+.outer-display {
     background-color: black;
     grid-column: 1/4;
     padding: 10px;
@@ -47,11 +47,13 @@ body {
 
 .previous-operand {
     font-size: 1rem;
-    color:rgba(255, 255, 255, .65)
+    color:rgba(255, 255, 255, .65);
+    margin-top: -10px;
 }
 
 .current-operand {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-top: 15px;
 }
 
 button {

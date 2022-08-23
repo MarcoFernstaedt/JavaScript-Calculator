@@ -74,3 +74,14 @@ function calculate() {
     currentOperandTextElement.textContent = previousNum;
     operator = ''
 }
+
+function displayResults() {
+    previousOperandTextElement.textContent = ''
+    operator = '';
+
+    if (previousNum.length <= 11) {
+        currentOperandTextElement.textContent = previousNum;
+    } else {
+        currentOperandTextElement.textContent = previousNum.slice(0, 11) + '...';
+    }
+}
