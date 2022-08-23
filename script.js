@@ -13,7 +13,7 @@ const operatorBtn = document.querySelectorAll('.operator')
 
 // setting default value to display and operator
 let currentNum = ''
-let previousNumber = ''
+let previousNum = ''
 let operator = ''
 
 // adding event listener to number buttons
@@ -30,3 +30,10 @@ function handleNumber(number) {
         currentOperandTextElement.textContent = currentNum;
     }
 }
+
+// adding event listener to operator buttons
+operatorBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        handleOperator(e.target.textContent)
+    })
+})
