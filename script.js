@@ -3,7 +3,11 @@ const previousOperandTextElement = document.querySelector('.previous-operand')
 const currentOperandTextElement = document.querySelector('.current-operand')
 
 const equals = document.querySelector('.equals')
-equals.addEventListener('click', calculate)
+equals.addEventListener('click', () => {
+    if (currentNum != '' && previousNum != '') {
+        calculate()
+    }
+})
 
 const decimal = document.querySelector('.decimal')
 
@@ -75,6 +79,7 @@ function calculate() {
     displayResults();
 }
 
+// rounds number to the 10th decimal
 function roundNumber(num) {
     return Math.round(num * 100000) / 100000;
 }
