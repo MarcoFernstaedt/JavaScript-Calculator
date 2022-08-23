@@ -70,9 +70,8 @@ function calculate() {
         }
         previousNum /= currentNum;
     }
-    previousOperandTextElement.textContent = '';
-    currentOperandTextElement.textContent = previousNum;
-    operator = ''
+    previousNum = previousNum.toString()
+    displayResults();
 }
 
 function displayResults() {
