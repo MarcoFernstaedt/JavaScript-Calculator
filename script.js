@@ -3,6 +3,7 @@ const previousOperandTextElement = document.querySelector('.previous-operand')
 const currentOperandTextElement = document.querySelector('.current-operand')
 
 const equals = document.querySelector('.equals')
+equals.addEventListener('click', calculate)
 
 const decimal = document.querySelector('.decimal')
 
@@ -46,4 +47,30 @@ function handleOperator(op) {
     previousOperandTextElement.textContent = previousNum + ' ' + operator;
     currentNum = ''
     currentOperandTextElement.textContent = '';
+}
+
+// function to calculate input
+function calculate() {
+    previousNum = Number(previousNum)
+    currentNum = Number(currentNum)
+
+    if (operator === '+') {
+        previousNum += currentNum;
+    } else if (operator === '-') {
+        previousNum -= currentNum;
+    } else if (operator === 'x') {
+        previousNum *= currentNum;
+    } else if (operator === '/') {
+        if (currentNum <= 0) {
+            previousNum = 'Dividing by zero, really?'
+            previousOperandTextElement.textContent = ''
+            currentOperandTextElement.textContent = previousNum
+            operator = ''
+            return;
+        }
+        previousNum /= currentNum;
+    }
+    previousOperandTextElement.textContent = '';
+    currentOperandTextElement.textContent = previousNum;
+    operator = ''
 }
