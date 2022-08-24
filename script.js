@@ -1,3 +1,5 @@
+const { toComputedKey } = require("@babel/types")
+
 // setting default value to display and operator
 let currentNum = ''
 let previousNum = ''
@@ -139,3 +141,45 @@ function addDecimal() {
     }
 }
 
+// function to handle key press to work with calculator buttons
+function handleKeyPress(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <= 9) {
+        handleNumber(e.key)
+    }
+
+    if (e.key === 'Enter' || e.key === '=' && currentNum != '' && previousNum != '') {
+        compute())
+    }
+
+    if (e.key === '+' || e.key === '-' || e.key === '/') {
+        handleOperator(e.key)
+    }
+
+    if (e.key === '*') {
+        handleOperator('x')
+    }
+
+    if (e.key === '.') {
+        addDecimal();
+    }
+
+    if (e.key === 'Backspace') {
+        handleDelete();
+    }
+}
+
+// functon to give ability to delete when backspace key is pressed
+function handleDelete() {
+    if (currentNum != '') {
+        currentNum = currentNum.slice(0, -1)
+        currentOperandTextElement.textContent = currentNum
+        if (currentNum === '') {
+            currentOperandTextElement.textContent = '0'
+        }
+    }
+    if (currentNum === '' && previousNum != '' && operator === '') {
+        previousNum = previousNum.slice(0, -1)
+        currentOperandTextElement.textContent = previousNum
+    }
+}
