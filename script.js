@@ -1,5 +1,3 @@
-const { toComputedKey } = require("@babel/types")
-
 // setting default value to display and operator
 let currentNum = ''
 let previousNum = ''
@@ -149,7 +147,7 @@ function handleKeyPress(e) {
     }
 
     if (e.key === 'Enter' || e.key === '=' && currentNum != '' && previousNum != '') {
-        compute())
+        compute();
     }
 
     if (e.key === '+' || e.key === '-' || e.key === '/') {
