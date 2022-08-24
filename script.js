@@ -1,6 +1,13 @@
+// setting default value to display and operator
+let currentNum = ''
+let previousNum = ''
+let operator = ''
+
 // Selectors
 const previousOperandTextElement = document.querySelector('.previous-operand')
 const currentOperandTextElement = document.querySelector('.current-operand')
+
+window.addEventListener('keydown', handleKeyPress)
 
 const equals = document.querySelector('.equals')
 // adding an event listener to equals with conditional statement and function call
@@ -11,6 +18,10 @@ equals.addEventListener('click', () => {
 })
 
 const decimal = document.querySelector('.decimal')
+// added event listener and function call to decimal
+decimal.addEventListener('click', () => {
+    addDecimal();
+})
 
 const clear = document.querySelector('.clear')
 // adding event listener to clear and a function call
@@ -18,11 +29,6 @@ clear.addEventListener('click', clearCalculator)
 
 const numberBtn = document.querySelectorAll('.number')
 const operatorBtn = document.querySelectorAll('.operator')
-
-// setting default value to display and operator
-let currentNum = ''
-let previousNum = ''
-let operator = ''
 
 // adding event listener to number buttons
 numberBtn.forEach((btn) => {
@@ -34,6 +40,10 @@ numberBtn.forEach((btn) => {
 
 // function to calculate which number button was pressed
 function handleNumber(number) {
+    if (previousNum != '' && currentNum != '' && operator === '') {
+        previousNum = ''
+        currentOperandTextElement.textContent = currentNum
+    }
     if (currentNum.length < 11) {
         currentNum += number;
         currentOperandTextElement.textContent = currentNum;
@@ -49,11 +59,26 @@ operatorBtn.forEach((btn) => {
 
 // function to calculate which operator button was pressed
 function handleOperator(op) {
-    operator = op;
-    previousNum = currentNum;
+    if (previousNum === '') {
+        previousNum = currentNum;
+        operatorCheck(op)
+    } else if (currentNum === '') {
+        operatorCheck(op)
+    } else {
+        calculate()
+        operator = op
+        currentOperandTextElement.textContent = '0';
+        previousOperandTextElement.textContent = previousNum + ' ' + operator;
+
+    }
+}
+
+// checks to see if operator already exist to continue a longer expression
+function operatorCheck(textContent) {
+    operator = text;
     previousOperandTextElement.textContent = previousNum + ' ' + operator;
+    currentOperandTextElement.textContent = '0';
     currentNum = ''
-    currentOperandTextElement.textContent = '';
 }
 
 // function to calculate input
@@ -89,14 +114,14 @@ function roundNumber(num) {
 
 // display results to screen
 function displayResults() {
-    previousOperandTextElement.textContent = ''
-    operator = '';
-
     if (previousNum.length <= 11) {
         currentOperandTextElement.textContent = previousNum;
     } else {
         currentOperandTextElement.textContent = previousNum.slice(0, 11) + '...';
     }
+    previousOperandTextElement.textContent = ''
+    operator = '';
+    currentNum = ''
 }
 
 function clearCalculator() {
@@ -105,3 +130,12 @@ function clearCalculator() {
     currentNum = ''
     currentOperandTextElement.textContent = '0'
 }
+
+// function to add decimal 
+function addDecimal() {
+    if (!currentNum.includes('.')) {
+        currentNum += '.'
+        currentOperandTextElement.textContent = currentNum
+    }
+}
+
